@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import NVcliente from '../screens/Clientes/clienteNV.js'
-import NVreserva from '../screens/Reserva/reservaNV.js'
-import NVpedidos from '../screens/Pedido/pedidoNV.js'
+import NVreserva from '../screens/Reserva/reservaNV'
+import NVFuncionario from '../screens/Funcionarios/funcionarioNV'
+import NVpedidos from '../screens/Pedido/pedidoNV'
+import NavegacaoCardapio from '../screens/Cardapio/cardapioNV'
 
 
 const Stack = createStackNavigator()
@@ -14,7 +15,7 @@ export default function Rota() {
             initialRouteName='NVpedidos'
         >
 
-            <Stack.Screen name='NVpedidos' component={NVpedidos} />
+            <Stack.Screen name='NVpedidos' component={NavegacaoCardapio} />
 
 
         </Stack.Navigator>

@@ -1,6 +1,7 @@
 import { Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
+import DropDownPicker from 'react-native-dropdown-picker'
 import { TextInputMask } from 'react-native-masked-text'
 import { Button, Text, TextInput } from 'react-native-paper'
 import Toast from 'react-native-toast-message'
@@ -12,6 +13,13 @@ export default function FRPedidos({ navigation, route }) {  // Alteração do no
   const [nomePrato, setNomePrato] = useState('');  // Alteração do nome da variável
   const [horarioPedido, setHorarioPedido] = useState('');  // Alteração do nome da variável
   const [formaPagamento, setFormaPagamento] = useState('');  // Alteração do nome da variável
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+      {label: 'Cartão', value: 'Cartão'},
+      {label: 'Pix', value: 'Pix'},
+      {label: 'Dinheiro', value: 'Dinheiro'},
+  ]);
 
   const validationSchema = Yup.object().shape({
     nomePrato: Yup.string().required('Campo obrigatório!'),  // Alteração do nome da variável
@@ -45,14 +53,15 @@ export default function FRPedidos({ navigation, route }) {  // Alteração do no
   return (
     <View style={styles.container}>
       <Text variant="titleLarge" style={styles.title}>
-        {pedidoAntigo ? 'Editar Pedido' : 'Adicionar Pedido'}  // Alteração do texto
+        {pedidoAntigo ? 'Editar Pedido' : 'Adicionar Pedido'}
       </Text>
 
       <Formik
         initialValues={{
           nomePrato: '',
           horarioPedido: pedidoAntigo ? pedidoAntigo.horarioPedido : '',  // Alteração do nome da variável
-          formaPagamento: pedidoAntigo ? pedidoAntigo.formaPagamento : '',  // Alteração do nome da variável
+          formaPagamento: pedidoAntigo ? pedidoAntigo.formaPagamento : '',
+            // Alteração do nome da variável
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => salvar(values)}
@@ -82,14 +91,16 @@ export default function FRPedidos({ navigation, route }) {  // Alteração do no
                 onBlur={handleBlur('horarioPedido')}
               />
 
-              <TextInput
-                style={styles.input}
-                mode="outlined"
-                label="Forma de Pagamento"  // Alteração do texto
-                value={values.formaPagamento}
-                onChangeText={handleChange('formaPagamento')}
-                onBlur={handleBlur('formaPagamento')}
-              />
+                <DropDownPicker
+                    open={open}
+                    value={value}
+                    items={items}
+                    onChangeValue={handleChange('formaPagamento')}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                    placeholder={'Escolha uma forma de pagamento.'}
+                />
             </View>
             <View style={styles.buttonContainer}>
               <Button

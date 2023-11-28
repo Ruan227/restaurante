@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { Button, Card, Dialog, FAB, Text } from 'react-native-paper';
+import { Button, Card, Dialog, FAB, Portal, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
 
@@ -82,13 +82,13 @@ export default function LSPedido({ navigation, route }) {
               style={styles.cardContent}
             >
               <View style={{ flex: 1 }}>
-                <Text variant='titleMedium'>Nome do Pedido: {item?.nomePedido}</Text>
+                <Text variant='titleMedium'>Nome do Pedido: {item?.nomePrato}</Text>
                 <Text variant='bodyLarge'>Horário do Pedido: {item?.horarioPedido}</Text>
                 <Text variant='bodyLarge'>Forma de Pagamento: {item.formaPagamento}</Text>
               </View>
             </Card.Content>
             <Card.Actions>
-              <Button onPress={() => navigation.push('FormPedido', { acao: editarPedido, pedido: item })}>
+              <Button onPress={() => navigation.push('Formpedido', { acao: editarPedido, pedido: item })}>
                 Editar
               </Button>
               <Button onPress={() => {
@@ -106,7 +106,7 @@ export default function LSPedido({ navigation, route }) {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => navigation.push('FormPedido', { acao: adicionarPedido })}
+        onPress={() => navigation.push('Formpedido', { acao: adicionarPedido })}
       />
 
       {/* Modal Excluir Pedido */}
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     flexDirection: 'row',
-    backgroundColor: MD3Colors.primary80,
+    backgroundColor: '#000',
     borderWidth: 2,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,

@@ -8,10 +8,10 @@ export default function NVpedidos() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName='ListaFuncionario'
+      initialRouteName='Listapedidos'
     >
-      <Stack.Screen name='Listapedido' component={LSPedido} />
-      <Stack.Screen name='Formpedio' component={FRPedidos} />
+      <Stack.Screen name='Listapedidos' component={LSPedido} />
+      <Stack.Screen name='Formpedido' component={FRPedidos} />
     </Stack.Navigator>
   )
 }
