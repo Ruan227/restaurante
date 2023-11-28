@@ -6,28 +6,34 @@ import { Button, Text, TextInput } from 'react-native-paper'
 import Toast from 'react-native-toast-message'
 import * as Yup from 'yup'
 
+const LanchoneteColors = {
+  primary: '#FF9800',
+  accent: '#FFC107',
+  background: '#FAFAFA',
+  text: '#212121',
+};
+
 export default function FRReserva({ navigation, route }) {
   const { acao, reserva: reservaAntiga } = route.params;
 
+  const [local, setLocal] = useState('');
+  const [horario, setHorario] = useState('');
   const [nome, setNome] = useState('');
-  const [idade, setIdade] = useState('');
-  const [peso, setPeso] = useState('');
-  const [altura, setAltura] = useState('');
+  const [cpf, setCpf] = useState('');
 
   const validationSchema = Yup.object().shape({
     cpf: Yup.string().required('Campo obrigatório!'),
     nome: Yup.string().required(),
-    idade: Yup.string().required(),
-    peso: Yup.string().required(),
-    altura: Yup.string().required(),
+    horario: Yup.string().required(),
+    local: Yup.string().required(),
   });
 
   useEffect(() => {
     if (reservaAntiga) {
+      setLocal(reservaAntiga.local);
+      setHorario(reservaAntiga.horario);
       setNome(reservaAntiga.nome);
-      setIdade(reservaAntiga.idade);
-      setPeso(reservaAntiga.peso);
-      setAltura(reservaAntiga.altura);
+      setCpf(reservaAntiga.cpf);
     }
   }, [reservaAntiga]);
 
@@ -56,9 +62,8 @@ export default function FRReserva({ navigation, route }) {
         initialValues={{
           cpf: '',
           nome: reservaAntiga ? reservaAntiga.nome : '',
-          idade: reservaAntiga ? reservaAntiga.idade : '',
-          peso: reservaAntiga ? reservaAntiga.peso : '',
-          altura: reservaAntiga ? reservaAntiga.altura : '',
+          horario: reservaAntiga ? reservaAntiga.horario : '',
+          local: reservaAntiga ? reservaAntiga.local : '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => salvar(values)}
@@ -75,14 +80,10 @@ export default function FRReserva({ navigation, route }) {
                 onBlur={handleBlur('cpf')}
                 error={errors.cpf ? true : false}
                 keyboardType="numeric"
-                render={props =>
-                    <TextInputMask
-                      {...props}
-                      type={'cpf'}
-                    />
-                  }
+                render={(props) => (
+                  <TextInputMask {...props} type={'cpf'} />
+                )}
               />
-
               {touched.cpf && errors.cpf && (
                 <Text style={{ color: 'red', textAlign: 'center' }}>{errors.cpf}</Text>
               )}
@@ -99,28 +100,19 @@ export default function FRReserva({ navigation, route }) {
               <TextInput
                 style={styles.input}
                 mode="outlined"
-                label="Idade"
-                value={values.idade}
-                onChangeText={handleChange('idade')}
-                onBlur={handleBlur('idade')}
+                label="Horário"
+                value={values.horario}
+                onChangeText={handleChange('horario')}
+                onBlur={handleBlur('horario')}
               />
 
               <TextInput
                 style={styles.input}
                 mode="outlined"
-                label="Peso"
-                value={values.peso}
-                onChangeText={handleChange('peso')}
-                onBlur={handleBlur('peso')}
-              />
-
-              <TextInput
-                style={styles.input}
-                mode="outlined"
-                label="Altura"
-                value={values.altura}
-                onChangeText={handleChange('altura')}
-                onBlur={handleBlur('altura')}
+                label="Local"
+                value={values.local}
+                onChangeText={handleChange('local')}
+                onBlur={handleBlur('local')}
               />
             </View>
             <View style={styles.buttonContainer}>
@@ -148,10 +140,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: LanchoneteColors.background,
   },
   title: {
     fontWeight: 'bold',
     margin: 10,
+    color: LanchoneteColors.primary,
   },
   inputContainer: {
     width: '90%',
@@ -168,5 +162,6 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
+    backgroundColor: LanchoneteColors.accent,
   },
 });

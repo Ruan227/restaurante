@@ -1,13 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { Button, Card, Dialog, FAB, MD3Colors, Portal, Text } from 'react-native-paper';
+import { Button, Card, Dialog, FAB, Portal, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
+const LanchoneteColors = {
+  primary: '#FF9800',
+  accent: '#FFC107',
+  background: '#FAFAFA',
+  text: '#212121',
+};
 
 export default function LSReservas({ navigation, route }) {
 
   const [reservas, setReservas] = useState([]);
-  const [showModalExcluirUsuario, setShowModalExcluirUsuario] = useState(false);
+  const [showModalExcluirReserva, setShowModalExcluirReserva] = useState(false);
   const [reservaASerExcluida, setReservaASerExcluida] = useState(null);
 
   useEffect(() => {
@@ -21,9 +27,9 @@ export default function LSReservas({ navigation, route }) {
     setReservas(reservasStorage);
   }
 
-  const showModal = () => setShowModalExcluirUsuario(true);
+  const showModal = () => setShowModalExcluirReserva(true);
 
-  const hideModal = () => setShowModalExcluirUsuario(false);
+  const hideModal = () => setShowModalExcluirReserva(false);
 
   async function adicionarReserva(reserva) {
     let novaListaReservas = reservas;
@@ -82,13 +88,9 @@ export default function LSReservas({ navigation, route }) {
             >
               <View style={{ flex: 1 }}>
                 <Text variant='titleMedium'>{item?.nome}</Text>
-                <Text variant='bodyLarge'>Idade: {item?.idade}</Text>
-                <Text variant='bodyLarge'>Altura: {item?.altura} cm</Text>
-                <Text variant='bodyLarge'>Peso: {item.peso} kg</Text>
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text variant='titleMedium'>IMC</Text>
-                {/* Aqui você pode adicionar a função getImc() se necessário */}
+                <Text variant='bodyLarge'>Horário: {item?.horario}</Text>
+                <Text variant='bodyLarge'>Local: {item?.local}</Text>
+                <Text variant='bodyLarge'>CPF: {item.cpf}</Text>
               </View>
             </Card.Content>
             <Card.Actions>
@@ -113,9 +115,9 @@ export default function LSReservas({ navigation, route }) {
         onPress={() => navigation.push('FormReserva', { acao: adicionarReserva })}
       />
 
-      {/* Modal Excluir Usuário */}
+      {/* Modal Excluir Reserva */}
       <Portal>
-        <Dialog visible={showModalExcluirUsuario} onDismiss={hideModal}>
+        <Dialog visible={showModalExcluirReserva} onDismiss={hideModal}>
           <Dialog.Title>Atenção!</Dialog.Title>
           <Dialog.Content>
             <Text variant="bodyMedium">Tem certeza que deseja excluir esta reserva?</Text>
@@ -135,30 +137,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: LanchoneteColors.background,
   },
   title: {
     fontWeight: 'bold',
-    margin: 10
+    margin: 10,
+    color: LanchoneteColors.primary,
   },
   fab: {
     position: 'absolute',
     margin: 16,
     right: 0,
     bottom: 0,
+    backgroundColor: LanchoneteColors.accent,
   },
   list: {
     width: '90%',
   },
   card: {
-    marginTop: 15
+    marginTop: 15,
+    backgroundColor: LanchoneteColors.text,
+    elevation: 4,
   },
   cardContent: {
     flexDirection: 'row',
-    backgroundColor: MD3Colors.primary80,
-    borderWidth: 2,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    paddingBottom: 15
-  }
+    paddingTop: 15,
+  },
 });

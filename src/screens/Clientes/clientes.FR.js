@@ -1,10 +1,17 @@
-import { Formik } from 'formik'
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { TextInputMask } from 'react-native-masked-text'
-import { Button, Text, TextInput } from 'react-native-paper'
-import Toast from 'react-native-toast-message'
-import * as Yup from 'yup'
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
+import { Button, Text, TextInput } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
+import * as Yup from 'yup';
+
+const LanchoneteColors = {
+  primary: '#FF9800',
+  accent: '#FFC107',
+  background: '#FAFAFA',
+  text: '#212121',
+};
 
 export default function FRCliente({ navigation, route }) {
   const { acao, cliente: clienteAntigo } = route.params;
@@ -71,16 +78,13 @@ export default function FRCliente({ navigation, route }) {
                 onBlur={handleBlur('cpf')}
                 error={errors.cpf ? true : false}
                 keyboardType="numeric"
-                render={props =>
-                  <TextInputMask
-                    {...props}
-                    type={'cpf'}
-                  />
-                }
+                render={(props) => (
+                  <TextInputMask {...props} type={'cpf'} />
+                )}
               />
 
               {touched.cpf && errors.cpf && (
-                <Text style={{ color: 'red', textAlign: 'center' }}>{errors.cpf}</Text>
+                <Text style={{ color: LanchoneteColors.text, textAlign: 'center' }}>{errors.cpf}</Text>
               )}
 
               <TextInput
@@ -103,18 +107,15 @@ export default function FRCliente({ navigation, route }) {
 
               <TextInput
                 style={styles.input}
-                mode='outlined'
+                mode="outlined"
                 label={'Telefone'}
                 value={values.telefone}
                 onChangeText={handleChange('telefone')}
                 onBlur={handleBlur('telefone')}
                 error={touched.telefone && errors.telefone}
-                render={props =>
-                  <TextInputMask
-                    {...props}
-                    type={'cel-phone'}
-                  />
-                }
+                render={(props) => (
+                  <TextInputMask {...props} type={'cel-phone'} />
+                )}
               />
             </View>
             <View style={styles.buttonContainer}>
@@ -142,10 +143,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: LanchoneteColors.background,
   },
   title: {
     fontWeight: 'bold',
     margin: 10,
+    color: LanchoneteColors.primary,
   },
   inputContainer: {
     width: '90%',
@@ -162,5 +165,6 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
+    backgroundColor: LanchoneteColors.accent,
   },
 });

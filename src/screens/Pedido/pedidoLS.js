@@ -4,6 +4,12 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Card, Dialog, FAB, Portal, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
+const LanchoneteColors = {
+  primary: '#FF9800',
+  accent: '#FFC107',
+  background: '#FAFAFA',
+  text: '#212121',
+};
 
 export default function LSPedido({ navigation, route }) {
 
@@ -131,30 +137,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: LanchoneteColors.background,
   },
   title: {
     fontWeight: 'bold',
-    margin: 10
+    margin: 10,
+    color: LanchoneteColors.primary,
   },
   fab: {
     position: 'absolute',
     margin: 16,
     right: 0,
     bottom: 0,
+    backgroundColor: LanchoneteColors.accent,
   },
   list: {
     width: '90%',
   },
   card: {
-    marginTop: 15
+    marginTop: 15,
+    backgroundColor: LanchoneteColors.text,
+    elevation: 4,
   },
   cardContent: {
     flexDirection: 'row',
-    backgroundColor: '#000',
-    borderWidth: 2,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    paddingBottom: 15
-  }
+    paddingTop: 15,
+  },
 });

@@ -181,16 +181,23 @@ export default function FRFuncionario({ navigation, route }) {
     </View>
   );
 }
-
+const LanchoneteColors = {
+  primary: '#FF9800',
+  accent: '#FFC107',
+  background: '#FAFAFA',
+  text: '#212121',
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: LanchoneteColors.background,
   },
   title: {
     fontWeight: 'bold',
     margin: 10,
+    color: LanchoneteColors.primary,
   },
   inputContainer: {
     width: '90%',
@@ -207,5 +214,6 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
+    backgroundColor: LanchoneteColors.accent,
   },
 });

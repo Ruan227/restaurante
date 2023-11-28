@@ -137,35 +137,41 @@ export default function LScliente({ navigation, route }) {
     </View>
   )
 }
-
+const LanchoneteColors = {
+  primary: '#FF9800',
+  accent: '#FFC107',
+  background: '#FAFAFA',
+  text: '#212121',
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: LanchoneteColors.background,
   },
   title: {
     fontWeight: 'bold',
-    margin: 10
+    margin: 10,
+    color: LanchoneteColors.primary,
   },
   fab: {
     position: 'absolute',
     margin: 16,
     right: 0,
     bottom: 0,
+    backgroundColor: LanchoneteColors.accent,
   },
   list: {
     width: '90%',
   },
   card: {
-    marginTop: 15
+    marginTop: 15,
+    backgroundColor: LanchoneteColors.text,
+    elevation: 4,
   },
   cardContent: {
     flexDirection: 'row',
-    backgroundColor: MD3Colors.primary80,
-    borderWidth: 2,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    paddingBottom: 15
-  }
+    paddingTop: 15,
+  },
 });
